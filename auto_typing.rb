@@ -25,6 +25,9 @@ while line = s.gets
   end
 
   # get the word!
+  # |  -----    |
+  # |  |DES|    | <--
+  # |  -----    |
   lines = line.chop.split('|')
   if lines.size.eql? 4
     s.send(lines[2] + "\r\n", 0)

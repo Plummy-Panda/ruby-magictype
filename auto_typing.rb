@@ -1,8 +1,8 @@
 require 'socket'
 require './ipconfig.rb'
 
-# if you want use leaking to jump to congrats
-# you can also ues leaking.rb and set the retun addr = "\xed\x88\x04\x08""
+# if you want use leaking to jump to congrats()
+# you can also ues leaking.rb and set the return_addr = "\xed\x88\x04\x08""
 
 # need to fill in basic info in ipconfig.rb
 hostname = HOSTNAME

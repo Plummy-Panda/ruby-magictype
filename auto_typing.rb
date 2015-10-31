@@ -2,7 +2,7 @@ require 'socket'
 require './ipconfig.rb'
 
 # if you want use leaking to jump to congrats()
-# you can also ues leaking.rb and set the return_addr = "\xed\x88\x04\x08""
+# you can also ues leaking.rb and set the return_addr = "\xed\x88\x04\x08"
 
 # need to fill in basic info in ipconfig.rb
 hostname = HOSTNAME
@@ -11,11 +11,12 @@ port = PORT
 count = 0
 played = 0
 s = TCPSocket.open(hostname, port)
+
+# Read lines by lines from the socket
 while line = s.gets
-  # Read lines from the socket
   print line
 
-  # send choice to start game
+  # send choice '1' to start game
   # played not equal 0 means we have played once
   (line.chop.eql? '3.Exit') && (played == 0) && s.send("1\r\n", 0)
   # send speed setting

